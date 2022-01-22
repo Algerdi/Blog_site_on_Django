@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load sidebar %}
+
+{% block title %}Contact us:{{ block.super }}{% endblock %}
+
+{% block content %}
+
+<section class="single-blog-area">
+            <div class="container">
+                <div class="row">
+                   <div class="col-md-12">
+                    <div class="border-top">
+                        <div class="col-md-8">
+                        <div class="blog-area">
+{% if messages %}
+
+          {% for message in messages %}
+
+            {% if message.tags == 'error' %}
+              <div class="alert alert-danger" role="alert">
+                {{ message }}
+              </div>
+            {% else %}
+              <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+              </div>
+
+            {% endif %}
+
+          {% endfor %}
+
+          {% endif %}
+<h2>Contact us</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-block">Send</button>
+</form>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="newsletter">
+                            <h2 class="sidebar-title">Find post</h2>
+                            <form action="{% url 'search' %}" method="get">
+                                <input type="text" name="search" placeholder="Input...">
+                                <input type="submit" value="Find">
+                            </form>
+                        </div>
+                        {% get_popular_posts 3 %}
+                        {% get_tags %}
+
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

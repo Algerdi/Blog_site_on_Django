@@ -1,0 +1,16 @@
+
+
+
+<div class="{{ menu_class }}">
+    {% if request.user.is_authenticated %}
+          Приветствуем, {{ user.username }}! | <a href="{% url 'logout' %}">Выйти</a>
+
+          {% endif %}
+                            <ul>
+                                <li><a href="{% url 'contact' %}">Contact</a></li>
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                {% for item in categories %}
+                                <li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>

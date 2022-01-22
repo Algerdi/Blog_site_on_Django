@@ -1,0 +1,26 @@
+{% load menu %}
+
+<header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="logo">
+                            <h2><a href="{% url 'home' %}">MyProject</a></h2>
+                        </div>
+                    </div>
+                    <span class="navbar-text">
+          {% if request.user.is_authenticated %}
+          Приветствуем, {{ user.username }}! | <a href="{% url 'logout' %}">Выйти</a>
+          {% else %}
+          <a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Авторизация</a>
+          {% endif %}
+        </span>
+
+                    <div class="col-md-10">
+
+                        {% show_menu %}
+
+                    </div>
+                </div>
+            </div>
+        </header>
